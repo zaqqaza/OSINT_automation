@@ -1,6 +1,9 @@
 import threading
 import os
-from test_dir import hello
+from pathlib import Path
+
+base_dir = Path(__file__).parent
+lepus_dir = Path(base_dir / 'Lepus')
 
 
 def task1():
@@ -8,13 +11,13 @@ def task1():
     print("ID of process running task 1: {}".format(os.getpid()))
 
 
-def task2(domain):
-    os.system("nmap -sT -sV --version-intensity 0 -O -v --reason {} -oA {}.nmap -p 21,22,23,80,443,81,8443,8080,8081,8888,25,1403,3306,3389,135,139,445".format(domain, domain))
+def task2(domain_):
+    os.system("nmap -sT -sV --version-intensity 0 -O -v --reason {} -oA {}.nmap -p 21,22,23,80,443,81,8443,8080,8081,8888,25,1403,3306,3389,135,139,445".format(domain_, domain_))
 
 
-def task3(domain):
-    os.chdir(".\\Lepus")
-    os.system("python lepus.py {} -w lists\\subdomains.txt --permutate --reverse".format(domain))
+def task3(domain_):
+    os.chdir(lepus_dir)
+    os.system("python lepus.py {} -w lists\\subdomains.txt --permutate --reverse".format(domain_))
 
 
 if __name__ == "__main__":
