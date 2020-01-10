@@ -22,7 +22,7 @@ def task2(domain_):
 
 def task3(domain_):
     os.chdir(lepus_dir)
-    subdomains_txt_path = Path(lepus_dir / 'lists' / 'subdomains.txt')
+    subdomains_txt_path = os.path.join("lists", "subdomains.txt")
     os.system("{} lepus.py {} -w {} --permutate --reverse".format(py_command, domain_, subdomains_txt_path))
 
 
