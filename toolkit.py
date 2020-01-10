@@ -13,7 +13,7 @@ def task2(domain):
 
 
 def task3(domain):
-    os.chdir("C:\\Users\\gunnara\\PycharmProjects\\red_team\\OSINT_automation\\Lepus")
+    os.chdir("C:.\\Lepus")
     os.system("python lepus.py {} -w lists\\subdomains.txt --permutate --reverse".format(domain))
 
 
