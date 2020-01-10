@@ -5,6 +5,11 @@ from pathlib import Path
 base_dir = Path(__file__).parent
 lepus_dir = Path(base_dir / 'Lepus')
 
+if os.name == "nt":
+    py_command = "python"
+else:
+    py_command = "python3"
+
 
 def task1():
     print("Task 1 assigned thread: {}".format(threading.current_thread().name))
@@ -17,7 +22,7 @@ def task2(domain_):
 
 def task3(domain_):
     os.chdir(lepus_dir)
-    os.system("python lepus.py {} -w lists\\subdomains.txt --permutate --reverse".format(domain_))
+    os.system("{} lepus.py {} -w lists\\subdomains.txt --permutate --reverse".format(py_command, domain_))
 
 
 if __name__ == "__main__":
