@@ -2,8 +2,6 @@ from __future__ import print_function
 # http://api.hackertarget.com/whois/?q=verisgroup.com
 # !/usr/bin/env python
 
-from builtins import str
-from builtins import object
 import requests
 import configparser
 import logging

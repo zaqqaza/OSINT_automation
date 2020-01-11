@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from __future__ import print_function
-from builtins import str
-from builtins import object
+
 import configparser
 from bs4 import BeautifulSoup
 from Helpers import Download

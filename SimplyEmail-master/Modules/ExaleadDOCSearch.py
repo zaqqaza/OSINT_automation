@@ -7,8 +7,7 @@ from __future__ import print_function
 # 3) execute function (calls everything it needs)
 # 4) places the findings into a queue
 
-from builtins import str
-from builtins import object
+
 import configparser
 import logging
 from Helpers import Download

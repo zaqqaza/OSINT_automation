@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from __future__ import print_function
-from builtins import str
-from builtins import object
 import configparser
 from Helpers import Download
 from Helpers import Parser

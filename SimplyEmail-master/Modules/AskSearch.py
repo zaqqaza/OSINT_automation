@@ -2,8 +2,7 @@
 # Port from theHarvester! Shout out to him for the code:
 # https://github.com/laramies/theHarvester/blob/master/discovery/asksearch.py
 from __future__ import print_function
-from builtins import str
-from builtins import object
+
 import configparser
 import logging
 from Helpers import Download
