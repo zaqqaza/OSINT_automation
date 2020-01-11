@@ -10,7 +10,10 @@ from __future__ import print_function
 import os
 import argparse
 import sys
-import configparser
+try:
+    import configparser
+except:
+    from six.moves import configparser
 from Helpers import helpers
 from Helpers import VersionCheck
 from Common import TaskController
