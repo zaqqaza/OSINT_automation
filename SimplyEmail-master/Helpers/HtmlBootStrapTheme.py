@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # encoding=utf8 
-from __future__ import print_function
 import sys
 import ast
 
@@ -15,7 +14,7 @@ class HtmlBuilder(object):
         self.Domain = Domain
         self.Source = ""
         self.HTML = ""
-
+        reload(sys)
         sys.setdefaultencoding('utf8')
 
     def BuildHtml(self):
@@ -122,14 +121,14 @@ function AnchorJS(a){"use strict";this.options=a||{},this._applyRemainingDefault
     def OutPutHTML(self, Path):
         try:
             with open('Helpers/bootstrap-3.3.5/SimplyEmailTemplate.html', "r") as myfile:
-                SourceHtml = str(myfile.read())
+                SourceHtml = unicode(myfile.read())
         except Exception as e:
-            print(e)
+            print e
         # Add my tables to the bottom of the HTML and CSS
-        SourceHtml += str(self.HTML)
+        SourceHtml += unicode(self.HTML)
         buildpath = Path + '/Email_List.html'
         try:
             with open(buildpath, "w") as myfile:
                 myfile.write(SourceHtml)
         except Exception as e:
-            print(e)
+            print e

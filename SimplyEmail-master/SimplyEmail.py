@@ -6,14 +6,10 @@
 #
 # * = Require API Key
 #
-from __future__ import print_function
 import os
 import argparse
 import sys
-try:
-    import configparser
-except:
-    from six.moves import configparser
+import configparser
 from Helpers import helpers
 from Helpers import VersionCheck
 from Common import TaskController
@@ -74,7 +70,7 @@ def TaskStarter(version):
         sys.exit(0)
     if not len(cli_domain) > 1:
         log.warningmsg("Domain not supplied", "Main")
-        print(helpers.color("[*] No Domain Supplied to start up!\n", warning=True))
+        print helpers.color("[*] No Domain Supplied to start up!\n", warning=True)
         sys.exit(0)
     if cli_test:
         # setup a small easy test to activate certain modules
@@ -105,7 +101,7 @@ def main():
         config.read('Common/SimplyEmail.ini')
         version = str(config['GlobalSettings']['Version'])
     except Exception as e:
-        print(e)
+        print e
     orc = TaskController.Conducter()
     orc.title()
     orc.title_screen()
@@ -116,7 +112,7 @@ if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
-        print('Interrupted')
+        print 'Interrupted'
         try:
             sys.exit(0)
         except SystemExit:

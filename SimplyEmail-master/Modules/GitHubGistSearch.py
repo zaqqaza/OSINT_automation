@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from __future__ import print_function
-
 import configparser
 from bs4 import BeautifulSoup
 from Helpers import Download
@@ -34,7 +32,7 @@ class ClassName(object):
             self.Depth = int(config['GitHubGistSearch']['PageDepth'])
             self.Counter = int(config['GitHubGistSearch']['QueryStart'])
         except:
-            print(helpers.color(" [*] Major Settings for GitHubGistSearch are missing, EXITING!\n", warning=True))
+            print helpers.color(" [*] Major Settings for GitHubGistSearch are missing, EXITING!\n", warning=True)
 
     def execute(self):
         self.process()
@@ -50,7 +48,7 @@ class ClassName(object):
             if self.verbose:
                 p = ' [*] GitHub Gist Search Search on page: ' + \
                     str(self.Counter)
-                print(helpers.color(p, firewall=True))
+                print helpers.color(p, firewall=True)
             try:
                 # search?p=2&q=%40enron.com&ref=searchresults&utf8=✓
                 url = "https://gist.github.com/search?p=" + str(self.Counter) + "&q=%40" + \
@@ -61,7 +59,7 @@ class ClassName(object):
             except Exception as e:
                 error = " [!] Major issue with GitHubGist Search:" + \
                     str(e)
-                print(helpers.color(error, warning=True))
+                print helpers.color(error, warning=True)
             RawHtml = r.content
             # Parse the results for our URLS)
             soup = BeautifulSoup(RawHtml)
@@ -79,7 +77,7 @@ class ClassName(object):
             except Exception as e:
                 error = " [!] Connection Timed out on GithubGist Search:" + \
                     str(e)
-                print(helpers.color(error, warning=True))
+                print helpers.color(error, warning=True)
 
     def get_emails(self):
         Parse = Parser.Parser(self.Html)

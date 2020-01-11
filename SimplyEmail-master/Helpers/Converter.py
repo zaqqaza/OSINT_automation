@@ -1,7 +1,4 @@
 #!/usr/bin/env python
-from __future__ import print_function
-from future import standard_library
-standard_library.install_aliases()
 import logging
 import docx2txt
 from zipfile import ZipFile
@@ -11,7 +8,7 @@ from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
 from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
 from pdfminer.pdfpage import PDFPage
-from io import StringIO
+from cStringIO import StringIO
 
 
 class Converter(object):
@@ -21,7 +18,7 @@ class Converter(object):
             self.logger = logging.getLogger("SimplyEmail.Converter")
             self.verbose = verbose
         except Exception as e:
-            print(e)
+            print e
 
     def convert_docx_to_txt(self, path):
         """
@@ -35,7 +32,7 @@ class Converter(object):
         try:
             text = docx2txt.process(path)
             self.logger.debug("Converted docx to text: " + str(path))
-            return str(text)
+            return unicode(text)
         except Exception as e:
             text = ""
             return text
@@ -147,14 +144,14 @@ class Converter(object):
                     try:
                         text += str(a[x])
                     except Exception as e:
-                        print(e)
+                        print e
                         # pass
                 self.logger.debug("Unzip of file complted (raw text): " + str(path))
                 return text
             else:
                 return {name: input_zip.read(name) for name in input_zip.namelist()}
         except Exception as e:
-            print(e)
+            print e
             text = ""
             return text
             self.logger.error(

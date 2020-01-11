@@ -1,10 +1,8 @@
 #!/usr/bin/env python
-from __future__ import print_function
-from __future__ import absolute_import
-from . import helpers
+import helpers
 import requests
 import configparser
-from . import Download
+import Download
 
 # Email layouts supported:
 # {first}.{last} = alex.alex@domain.com
@@ -45,7 +43,7 @@ class EmailFormat(object):
                 self.type = "&type=generic"
                 self.etype = "generic_emails"
         except Exception as e:
-            print(e)
+            print e
 
     def EmailHunterDetect(self):
         '''
@@ -65,11 +63,11 @@ class EmailFormat(object):
             else:
                 if self.verbose:
                     e = ' [!] No pattern detected via EmailHunter API'
-                    print(helpers.color(e, firewall=True))
+                    print helpers.color(e, firewall=True)
                     return False
         except:
             error = "[!] Major issue with EmailHunter Search:" + str(e)
-            print(helpers.color(error, warning=True))
+            print helpers.color(error, warning=True)
 
     def BuildName(self, CleanName, Format, Raw=False):
         '''
@@ -136,12 +134,12 @@ class EmailFormat(object):
                     if self.verbose:
                         r = " [*] Email format matched {f}{last}: " + \
                             BuiltEmail
-                        print(helpers.color(r, firewall=True))
+                        print helpers.color(r, firewall=True)
                         if not Set:
                             FinalResult.append(Format)
                         Set = True
         except Exception as e:
-            print(e)
+            print e
         # Detect {f}.{last} format
         try:
             Set = False
@@ -158,12 +156,12 @@ class EmailFormat(object):
                     if self.verbose:
                         r = " [*] Email format matched {f}.{last}: " + \
                             BuiltEmail
-                        print(helpers.color(r, firewall=True))
+                        print helpers.color(r, firewall=True)
                         if not Set:
                             FinalResult.append(Format)
                         Set = True
         except Exception as e:
-            print(e)
+            print e
         # Detect {first}{last}
         try:
             Set = False
@@ -179,12 +177,12 @@ class EmailFormat(object):
                     if self.verbose:
                         r = " [*] Email format matched {first}{last}: " + \
                             BuiltEmail
-                        print(helpers.color(r, firewall=True))
+                        print helpers.color(r, firewall=True)
                         if not Set:
                             FinalResult.append(Format)
                         Set = True
         except Exception as e:
-            print(e)
+            print e
         # Detect {first}.{last}
         try:
             Set = False
@@ -200,12 +198,12 @@ class EmailFormat(object):
                     if self.verbose:
                         r = " [*] Email format matched {first}.{last}: " + \
                             BuiltEmail
-                        print(helpers.color(r, firewall=True))
+                        print helpers.color(r, firewall=True)
                         if not Set:
                             FinalResult.append(Format)
                         Set = True
         except Exception as e:
-            print(e)
+            print e
         # Detect {first}.{l}
         try:
             Set = False
@@ -222,12 +220,12 @@ class EmailFormat(object):
                     if self.verbose:
                         r = " [*] Email format matched {first}.{l}: " + \
                             BuiltEmail
-                        print(helpers.color(r, firewall=True))
+                        print helpers.color(r, firewall=True)
                         if not Set:
                             FinalResult.append(Format)
                         Set = True
         except Exception as e:
-            print(e)
+            print e
         # Detect {first}{l}
         try:
             Set = False
@@ -244,12 +242,12 @@ class EmailFormat(object):
                     if self.verbose:
                         r = " [*] Email format matched {first}{l}: " + \
                             BuiltEmail
-                        print(helpers.color(r, firewall=True))
+                        print helpers.color(r, firewall=True)
                         if not Set:
                             FinalResult.append(Format)
                         Set = True
         except Exception as e:
-            print(e)
+            print e
         # Detect {first}.{last}
         try:
             Set = False
@@ -265,12 +263,12 @@ class EmailFormat(object):
                     if self.verbose:
                         r = " [*] Email format matched {first}_{last}: " + \
                             BuiltEmail
-                        print(helpers.color(r, firewall=True))
+                        print helpers.color(r, firewall=True)
                         if not Set:
                             FinalResult.append(Format)
                         Set = True
         except Exception as e:
-            print(e)
+            print e
         try:
             Set = False
             Format = '{first}'
@@ -284,12 +282,12 @@ class EmailFormat(object):
                 if Count > 0:
                     if self.verbose:
                         r = " [*] Email format matched {first}: " + BuiltEmail
-                        print(helpers.color(r, firewall=True))
+                        print helpers.color(r, firewall=True)
                         if not Set:
                             FinalResult.append(Format)
                         Set = True
         except Exception as e:
-            print(e)
+            print e
         # Finaly return the list of Formats
         # print FinalResult
         return FinalResult
@@ -314,15 +312,15 @@ class EmailFormat(object):
                             FirstIntial) + str(LastName) + "@" + Domain
                         if Verbose:
                             e = ' [*] Email built: ' + str(BuiltName)
-                            print(helpers.color(e, firewall=True))
+                            print helpers.color(e, firewall=True)
                         if BuiltName:
                             BuiltEmails.append(BuiltName)
                 except Exception as e:
-                    print(e)
+                    print e
             if BuiltEmails:
                 return BuiltEmails
             else:
-                print(helpers.color(' [!] NO Names built, please do a sanity check!', warning=True))
+                print helpers.color(' [!] NO Names built, please do a sanity check!', warning=True)
                 return False
         elif Format == '{f}.{last}':
             for name in CleanNames:
@@ -337,15 +335,15 @@ class EmailFormat(object):
                             str(LastName) + "@" + Domain
                         if Verbose:
                             e = ' [*] Email built: ' + str(BuiltName)
-                            print(helpers.color(e, firewall=True))
+                            print helpers.color(e, firewall=True)
                         if BuiltName:
                             BuiltEmails.append(BuiltName)
                 except Exception as e:
-                    print(e)
+                    print e
             if BuiltEmails:
                 return BuiltEmails
             else:
-                print(helpers.color(' [!] No names built, please do a sanity check!', warning=True))
+                print helpers.color(' [!] No names built, please do a sanity check!', warning=True)
                 return False
         elif Format == '{first}{last}':
             for name in CleanNames:
@@ -358,15 +356,15 @@ class EmailFormat(object):
                             FirstName) + str(LastName) + "@" + Domain
                         if Verbose:
                             e = ' [*] Email built: ' + str(BuiltName)
-                            print(helpers.color(e, firewall=True))
+                            print helpers.color(e, firewall=True)
                         if BuiltName:
                             BuiltEmails.append(BuiltName)
                 except Exception as e:
-                    print(e)
+                    print e
             if BuiltEmails:
                 return BuiltEmails
             else:
-                print(helpers.color(' [!] No names built, please do a sanity check!', warning=True))
+                print helpers.color(' [!] No names built, please do a sanity check!', warning=True)
                 return False
         elif Format == '{first}.{last}':
             for name in CleanNames:
@@ -379,15 +377,15 @@ class EmailFormat(object):
                             FirstName) + '.' + str(LastName) + "@" + Domain
                         if Verbose:
                             e = ' [*] Email built: ' + str(BuiltName)
-                            print(helpers.color(e, firewall=True))
+                            print helpers.color(e, firewall=True)
                         if BuiltName:
                             BuiltEmails.append(BuiltName)
                 except Exception as e:
-                    print(e)
+                    print e
             if BuiltEmails:
                 return BuiltEmails
             else:
-                print(helpers.color(' [!] No names built, please do a sanity check!', warning=True))
+                print helpers.color(' [!] No names built, please do a sanity check!', warning=True)
                 return False
         elif Format == '{first}.{l}':
             for name in CleanNames:
@@ -401,15 +399,15 @@ class EmailFormat(object):
                             str(LastInitial) + "@" + Domain
                         if Verbose:
                             e = ' [*] Email built: ' + str(BuiltName)
-                            print(helpers.color(e, firewall=True))
+                            print helpers.color(e, firewall=True)
                         if BuiltName:
                             BuiltEmails.append(BuiltName)
                 except Exception as e:
-                    print(e)
+                    print e
             if BuiltEmails:
                 return BuiltEmails
             else:
-                print(helpers.color(' [!] No names built, please do a sanity check!', warning=True))
+                print helpers.color(' [!] No names built, please do a sanity check!', warning=True)
                 return False
         elif Format == '{first}{l}':
             for name in CleanNames:
@@ -423,15 +421,15 @@ class EmailFormat(object):
                             FirstName) + str(LastInitial) + "@" + Domain
                         if Verbose:
                             e = ' [*] Email built: ' + str(BuiltName)
-                            print(helpers.color(e, firewall=True))
+                            print helpers.color(e, firewall=True)
                         if BuiltName:
                             BuiltEmails.append(BuiltName)
                 except Exception as e:
-                    print(e)
+                    print e
             if BuiltEmails:
                 return BuiltEmails
             else:
-                print(helpers.color(' [!] No names built, please do a sanity check!', warning=True))
+                print helpers.color(' [!] No names built, please do a sanity check!', warning=True)
                 return False
         elif Format == '{first}_{last}':
             for name in CleanNames:
@@ -443,11 +441,11 @@ class EmailFormat(object):
                         BuiltName = FirstName + "_" + LastName + "@" + Domain
                         if Verbose:
                             e = ' [*] Email built: ' + str(BuiltName)
-                            print(helpers.color(e, firewall=True))
+                            print helpers.color(e, firewall=True)
                         if BuiltName:
                             BuiltEmails.append(BuiltName)
                 except Exception as e:
-                    print(e)
+                    print e
             if BuiltEmails:
                 return BuiltEmails
         elif Format == '{first}':
@@ -459,13 +457,13 @@ class EmailFormat(object):
                         BuiltName = Name + "@" + Domain
                         if Verbose:
                             e = ' [*] Email built: ' + str(BuiltName)
-                            print(helpers.color(e, firewall=True))
+                            print helpers.color(e, firewall=True)
                         if BuiltName:
                             BuiltEmails.append(BuiltName)
                 except Exception as e:
-                    print(e)
+                    print e
             if BuiltEmails:
                 return BuiltEmails
             else:
-                print(helpers.color(' [!] No names built, please do a sanity check!', warning=True))
+                print helpers.color(' [!] No names built, please do a sanity check!', warning=True)
                 return False

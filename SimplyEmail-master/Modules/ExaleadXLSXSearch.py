@@ -1,4 +1,3 @@
-from __future__ import print_function
 # !/usr/bin/env python
 
 # Class will have the following properties:
@@ -6,7 +5,6 @@ from __future__ import print_function
 # 2) main name called "ClassName"
 # 3) execute function (calls everything it needs)
 # 4) places the findings into a queue
-
 import requests
 import configparser
 import time
@@ -18,7 +16,8 @@ from bs4 import BeautifulSoup
 
 # import for "'ascii' codec can't decode byte" error
 import sys
-
+reload(sys)
+sys.setdefaultencoding("utf-8")
 # import for "'ascii' codec can't decode byte" error
 
 
@@ -41,7 +40,7 @@ class ClassName(object):
             self.urlList = []
             self.Text = ""
         except:
-            print(helpers.color(" [*] Major Settings for ExaleadXLSXSearch are missing, EXITING!\n", warning=True))
+            print helpers.color(" [*] Major Settings for ExaleadXLSXSearch are missing, EXITING!\n", warning=True)
 
     def execute(self):
         self.search()
@@ -55,20 +54,20 @@ class ClassName(object):
             time.sleep(1)
             if self.verbose:
                 p = ' [*] Exalead XLSX Search on page: ' + str(self.Counter)
-                print(helpers.color(p, firewall=True))
+                print helpers.color(p, firewall=True)
             try:
                 url = 'http://www.exalead.com/search/web/results/?q="%40' + self.Domain + \
                       '"+filetype:xlsx&elements_per_page=' + \
                     str(self.Quanity) + '&start_index=' + str(self.Counter)
             except Exception as e:
                 error = " [!] Major issue with Exalead XLSX Search:" + str(e)
-                print(helpers.color(error, warning=True))
+                print helpers.color(error, warning=True)
             try:
                 r = requests.get(url, headers=self.UserAgent)
             except Exception as e:
                 error = " [!] Fail during Request to Exalead (Check Connection):" + str(
                     e)
-                print(helpers.color(error, warning=True))
+                print helpers.color(error, warning=True)
             try:
                 RawHtml = r.content
                 # sometimes url is broken but exalead search results contain
@@ -79,7 +78,7 @@ class ClassName(object):
                                 for h4 in soup.findAll('h4', class_='media-heading')]
             except Exception as e:
                 error = " [!] Fail during parsing result: " + str(e)
-                print(helpers.color(error, warning=True))
+                print helpers.color(error, warning=True)
             self.Counter += 30
 
         # now download the required files
@@ -87,7 +86,7 @@ class ClassName(object):
             for url in self.urlList:
                 if self.verbose:
                     p = ' [*] Exalead XLSX search downloading: ' + str(url)
-                    print(helpers.color(p, firewall=True))
+                    print helpers.color(p, firewall=True)
                 try:
                     filetype = ".xlsx"
                     FileName, FileDownload = dl.download_file(url, filetype)
@@ -95,21 +94,21 @@ class ClassName(object):
                         if self.verbose:
                             p = ' [*] Exalead XLSX file was downloaded: ' + \
                                 str(url)
-                            print(helpers.color(p, firewall=True))
+                            print helpers.color(p, firewall=True)
                         self.Text += convert.convert_Xlsx_to_Csv(FileName)
                 except Exception as e:
                     error = " [!] Issue with opening Xlsx Files:%s\n" % (str(e))
-                    print(helpers.color(error, warning=True))
+                    print helpers.color(error, warning=True)
                 try:
                     dl.delete_file(FileName)
                 except Exception as e:
-                    print(e)
+                    print e
         except:
-            print(helpers.color("[*] No XLSX's to download from Exalead!\n", firewall=True))
+            print helpers.color("[*] No XLSX's to download from Exalead!\n", firewall=True)
 
         if self.verbose:
             p = ' [*] Searching XLSX from Exalead Complete'
-            print(helpers.color(p, status=True))
+            print helpers.color(p, status=True)
 
     def get_emails(self):
         Parse = Parser.Parser(self.Text)

@@ -6,6 +6,8 @@ tempdir=$(pwd)
 
 # Title Function
 func_title(){
+  # Clear (For Prettyness)
+  clear
 
   # Echo Title
   echo '=========================================================================='
@@ -42,7 +44,7 @@ func_install_requests(){
     brew install curl 
     brew install autoenv
     brew install git 
-    pip install python-magic
+    pip2 install python-magic
     echo "source $(brew --prefix autoenv)/activate.sh" >> ~/.bash_profile 
 fi
 
@@ -80,7 +82,7 @@ func_install_env(){
       echo " [*] Currently installing to Docker, skipping Python Virtenv"
   else
     # Setup virtual env
-    pip install autoenv
+    pip2 install autoenv
     echo "source `which activate.sh`" >> ~/.bashrc
     virtualenv --no-site-packages SE
     source SE/bin/activate
@@ -88,7 +90,7 @@ func_install_env(){
 }
 
 func_install_pip(){
-   pip install -r setup/requirments.txt 
+   pip2 install -r setup/requirments.txt
 }
 
 # Menu Case Statement
