@@ -1,0 +1,24 @@
+language: python
+python:
+  - "2.7"
+install:
+  - pip install coveralls
+  - pip install coverage
+  - pip install nose
+script:
+  - "git clone --branch master https://github.com/killswitch-GUI/SimplyEmail.git"
+  - "sudo sh setup/setup.sh"
+  - "cd SimplyEmail"
+  - "./setup/setup.sh"
+  - "source SE/bin/activate"
+  - "sudo ./SimplyEmail.py -l"
+  - "sudo ./SimplyEmail.py -h"
+  - "sudo ./SimplyEmail.py -n"
+  - "sudo ./SimplyEmail.py -verify"
+  - "sudo ./SimplyEmail.py -s"
+  - "sudo ./SimplyEmail.py -s -e cybersyndicates.com"
+  - nosetests --with-coverage
+  
+after_success:
+  - coveralls
+  
