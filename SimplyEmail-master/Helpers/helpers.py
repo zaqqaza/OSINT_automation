@@ -2,7 +2,6 @@
 
 from __future__ import division
 from __future__ import print_function
-from past.utils import old_div
 import os
 import textwrap
 import logging
@@ -131,7 +130,7 @@ def getua():
 def modsleep(delay, jitter=0):
     # Quick Snipit From EmPyre Agent (@HarmJ0y)
     if jitter < 0: jitter = -jitter
-    if jitter > 1: jitter = old_div(1,jitter)
+    if jitter > 1: jitter = 1/jitter
 
     minSleep = int((1.0-jitter)*delay)
     maxSleep = int((1.0+jitter)*delay)
